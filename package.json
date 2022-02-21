@@ -1,0 +1,8 @@
+{
+  "name": "hq-asociados",
+  "version": "1.0.0",
+  "description": "API Para gestion de datos",
+  "main": "index.js",
+  "author": "Gino Massei, Andres Bardagi",
+  "license": "MIT"
+}
