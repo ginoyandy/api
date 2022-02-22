@@ -23,6 +23,7 @@
     "nodemon": "^2.0.15",
     "pino": "^6.11.3",
     "pino-pretty": "^4.7.1",
+    "xlsx": "^0.18.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {

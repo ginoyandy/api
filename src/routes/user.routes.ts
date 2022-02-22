@@ -6,5 +6,5 @@ import { createUserSchema } from '../schemas/user.schema';
 
 export const usersRouter = express.Router();
 
-usersRouter.get('/',  validateRequest(createUserSchema), createUserHandler);
+usersRouter.get('/', validateRequest(createUserSchema), createUserHandler);
 usersRouter.post('/login', validateRequest(loginSchema), loginHandler);

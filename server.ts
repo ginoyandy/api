@@ -1,8 +1,8 @@
-import express, { Response, Request } from 'express';
+import express from 'express';
 import cors from 'cors';
 import { usersRouter } from './src/routes/user.routes';
 import 'dotenv/config';
-import { upload } from './src/service/files.service';
+import { makePdf } from './src/service/pdf.service';
 
 const app = express();
 
@@ -16,7 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use('/ping', upload);
+app.get('/ping', makePdf);
 app.use('/users', usersRouter);
 
 app.listen(process.env.PORT || 8080, () => {

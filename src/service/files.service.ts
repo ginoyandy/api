@@ -1,5 +1,4 @@
 // import { Dropbox, Error, files } from 'dropbox';
-import { makePdf } from './pdf.service';
 
 // const dbx = new Dropbox({ accessToken: process.env.TOKEN });
 
@@ -16,6 +15,7 @@ import { makePdf } from './pdf.service';
 import { Dropbox, Error, files } from 'dropbox';
 import fs = require('fs');
 import path = require('path');
+import { makePdf } from './pdf.service';
 
 const dbx = new Dropbox({ accessToken: process.env.TOKEN });
 
@@ -36,15 +36,22 @@ const dbx = new Dropbox({ accessToken: process.env.TOKEN });
 //   });
 // };
 
+// export const upload = () => {
+//   // This uploads basic.js to the root of your dropbox
+//   const pdf: any = makePdf();
+//   dbx.filesUpload({ path: '/hola/carpeta/ghola.pdf', contents: pdf })
+//     .then((response: any) => {
+//       console.log(response);
+//     })
+//     .catch((uploadErr: Error<files.UploadError>) => {
+//       console.log(uploadErr);
+//     });
+// };
+
+const XLSX = require('xlsx');
+
 export const upload = () => {
-    // This uploads basic.js to the root of your dropbox
-    const pdf: DropboxTypes.files.commitinfo = makePdf();
-    dbx.filesUpload({ path: '/hola/carpeta/ghola.pdf', pdf })
-      .then((response: any) => {
-        console.log(response);
-      })
-      .catch((uploadErr: Error<files.UploadError>) => {
-        console.log(uploadErr);
-      });
-  });
+  const workBook = XLSX.readFile('/Users/ginomassei/dev/abogada_api/02_12_2021-Quiroga.xlsx');
+  console.log(workBook);
+  XLSX.writeFile(workBook, 'hola.csv', { bookType: 'csv' });
 };
