@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { log } from '../helpers/logger';
 import { createUser, loginUser } from '../services/user.service';
 
-export async function createUserHandler(req:Request, res:Response) {
+export const createUserHandler = async (req:Request, res:Response): Promise<Response> => {
   try {
     const user = await createUser(req.body);
     const token = await loginUser({
@@ -15,22 +15,14 @@ export async function createUserHandler(req:Request, res:Response) {
       token,
     });
   } catch (e) {
-    if (typeof e === 'string') {
-      log.error(e);
-      return res.status(400).json({
-        error: true,
-        message: e,
-      });
-    } if (e instanceof Error) {
-      return res.status(400).json({
-        error: true,
-        message: e.message,
-      });
-    }
+    log.error(e);
+    return res.status(400).json({
+      message: e,
+    });
   }
-}
+};
 
-export async function loginHandler(req: Request, res: Response) {
+export const loginHandler = async (req: Request, res: Response): Promise<Response> => {
   try {
     const token = await loginUser({
       username: req.body.username,
@@ -42,17 +34,9 @@ export async function loginHandler(req: Request, res: Response) {
       token,
     });
   } catch (e) {
-    if (typeof e === 'string') {
-      log.error(e);
-      return res.status(401).json({
-        error: true,
-        message: e,
-      });
-    } if (e instanceof Error) {
-      return res.status(401).json({
-        error: true,
-        message: e.message,
-      });
-    }
+    log.error(e);
+    return res.status(400).json({
+      message: e,
+    });
   }
-}
+};

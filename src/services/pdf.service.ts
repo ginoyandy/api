@@ -220,5 +220,6 @@ export const makePdf = (order: Order) => {
   pdf.text('INFORMADO EL DÍA: ', rectanglesMarginLeft, y(15));
   pdf.text(order.informedDate ? order.informedDate : '-', rectanglesMarginLeft + textWidth('INFORMADO EL DÍA: '), yCurrent);
 
+  pdf.save('pdfmaster.pdf');
   return pdf.output('arraybuffer');
 };
