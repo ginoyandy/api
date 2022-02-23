@@ -5,7 +5,7 @@ import { log } from '../logger/index';
 const mongoAppUser = process.env.MONGODB_USER;
 const mongoAppKey = process.env.MONGODB_PASSWORD;
 
-function connect() {
+export const connect = () => {
   console.log(process.env.NODE_ENV);
   const URL = process.env.NODE_ENV == 'PROD';
   // ? `mongodb+srv://${mongoAppUser}:${mongoAppKey}@cluster0.fxnfi.mongodb.net/db-prod?retryWrites=true&w=majority`
@@ -19,6 +19,4 @@ function connect() {
   })
     .then(() => log.info('Succesfully connected with DB'))
     .catch((err) => log.info(err));
-}
-
-export default connect;
+};

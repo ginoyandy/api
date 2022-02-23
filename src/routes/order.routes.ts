@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Order } from '../model/order.model';
+import { Order } from '../models/order.model';
 import { makePdf } from '../service/pdf.service';
 
 export const ordersRouter = express.Router();
@@ -9,6 +9,6 @@ ordersRouter.post('/', (req: Request, res: Response) => {
   const requestData: Order = req.body;
   makePdf(requestData);
   res.json({ ok: 'ok' });
-}); // --> Genera el pdf
+}); // --> Genera el pdf --> retorna un id del pdf generado.
 ordersRouter.get('/pdf/{id}'); // --> Get un pdf by id
 ordersRouter.get('/pdf');

@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { log } from '../logger';
-// import User from '../model/user.model';
 import { createUser, loginUser } from '../service/user.service';
 
 export async function createUserHandler(req:Request, res:Response) {
