@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { Order } from '../models/order.model';
-import { makePdf } from '../service/pdf.service';
+import { makePdf } from '../services/pdf.service';
 
 export const ordersRouter = express.Router();
 

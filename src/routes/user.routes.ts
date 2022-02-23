@@ -1,5 +1,5 @@
 import express from 'express';
-import { createUserHandler, loginHandler } from '../controller/user.controller';
+import { createUserHandler, loginHandler } from '../controllers/user.controller';
 import { validateRequest } from '../middlewares/validateRequests';
 import { loginSchema } from '../schemas/login.schema';
 import { createUserSchema } from '../schemas/user.schema';

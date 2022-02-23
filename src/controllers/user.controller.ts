@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { log } from '../logger';
-import { createUser, loginUser } from '../service/user.service';
+import { createUser, loginUser } from '../services/user.service';
 
 export async function createUserHandler(req:Request, res:Response) {
   try {
