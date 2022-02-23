@@ -1,11 +1,11 @@
 import express from 'express';
-import { createOrderReport } from '../controllers/orders.controller';
+import { createOrderReport, createOrderObject } from '../controllers/orders.controller';
 import { OrderSchema } from '../data/schemas/order.schema';
 import { validateRequest } from '../middlewares/validateRequests';
 
 export const ordersRouter = express.Router();
 
-ordersRouter.get('/'); // --> Excel a BODY
-ordersRouter.post('/', validateRequest(OrderSchema), createOrderReport); // --> Genera el pdf --> retorna un id del pdf generado.
-ordersRouter.get('/pdf/{id}'); // --> Get un pdf by id
-ordersRouter.get('/pdf');
+ordersRouter.get('/pdf/:id'); // --> Get un pdf by id --> Guardar el pdf en dropbox Boolean de si se guardo --> Retornar el pdf por request
+ordersRouter.post('/excel', createOrderObject); // --> Excel a BODY --> Guardar el body en mongo --> Cargar el excel a dropbox --> return Booleano de si se subio a dropbox o no. Orders array
+ordersRouter.put('/:id', validateRequest(OrderSchema), createOrderReport); // Order id corregida insertada en mongo --> retorna un id del order insertado.
+// ordersRouter.get('/pdf');

@@ -1,22 +1,15 @@
 import mongoose from 'mongoose';
 import { log } from '../helpers/logger';
 
-/* DB Keys */
-const mongoAppUser = process.env.MONGODB_USER;
-const mongoAppKey = process.env.MONGODB_PASSWORD;
-
-export const connect = () => {
-  console.log(process.env.NODE_ENV);
-  const URL = process.env.NODE_ENV == 'PROD';
-  // ? `mongodb+srv://${mongoAppUser}:${mongoAppKey}@cluster0.fxnfi.mongodb.net/db-prod?retryWrites=true&w=majority`
-  // : `mongodb+srv://${mongoAppUser}:${mongoAppKey}@cluster0.fxnfi.mongodb.net/db-testing?retryWrites=true&w=majority`;
-
-  mongoose.connect(URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
+export const connectDB = async () => {
+  const databaseURI = process.env.DATABASE_URI || 'development';
+  await mongoose
+    .connect(databaseURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    })
     .then(() => log.info('Succesfully connected with DB'))
-    .catch((err) => log.info(err));
+    .catch((err) => log.err(err));
 };

@@ -85,7 +85,8 @@ export const makePdf = (order: Order) => {
   pdf.text(order.number ? order.number : '-', rectanglesMarginRight - textWidth(order.number ? order.number : '-'), yCurrent);
 
   pdf.text('BANCO MACRO S.A', rectanglesMarginLeft, y(15));
-  pdf.text('Sucursal: 300 - ALVEAR', rectanglesMarginLeft, y(15));
+  pdf.text('Sucursal: ', rectanglesMarginLeft, y(15));
+  pdf.text(order.office ? order.office : '-', rectanglesMarginLeft + textWidth('Sucursal: ') + 10, yCurrent);
 
   y(15);
   pdf.line(marginLeft, yCurrent, marginRight, yCurrent);

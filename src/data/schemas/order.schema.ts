@@ -25,5 +25,6 @@ export const OrderSchema = object({
     orderAmmount: number().required(),
     informedDate: string().required(),
     totalArea: number().required(),
+    office: string().required(),
   }),
 });

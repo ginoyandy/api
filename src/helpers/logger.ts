@@ -5,5 +5,4 @@ export const log = logger({
   base: {
     pid: false,
   },
-  timestamp: () => `, "time": "${Date.now()}"`,
 });

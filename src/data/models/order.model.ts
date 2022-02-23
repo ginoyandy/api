@@ -16,6 +16,7 @@ export class Order {
     orderAmmount: number;
     informedDate: string;
     totalArea: number;
+    office: string;
     constructor(
       orderedDate: string,
       number: string,
@@ -32,6 +33,7 @@ export class Order {
       informedDate: string,
       owners: Owner[],
       totalArea: number,
+      office: string,
     ) {
       this.orderedDate = orderedDate;
       this.number = number;
@@ -48,5 +50,6 @@ export class Order {
       this.informedDate = informedDate;
       this.owners = owners;
       this.totalArea = totalArea;
+      this.office = office;
     }
 }
