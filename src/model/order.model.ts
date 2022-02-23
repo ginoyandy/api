@@ -13,7 +13,7 @@ export class Order {
     volumeNumer: number;
     yearNumber: number;
     observations: string;
-    requestAmmount: number;
+    orderAmmount: number;
     informedDate: string;
     totalArea: number;
     constructor(
@@ -28,7 +28,7 @@ export class Order {
       volumeNumer: number,
       yearNumber: number,
       observations: string,
-      requestAmmount: number,
+      orderAmmount: number,
       informedDate: string,
       owners: Owner[],
       totalArea: number,
@@ -44,7 +44,7 @@ export class Order {
       this.volumeNumer = volumeNumer;
       this.yearNumber = yearNumber;
       this.observations = observations;
-      this.requestAmmount = requestAmmount;
+      this.orderAmmount = orderAmmount;
       this.informedDate = informedDate;
       this.owners = owners;
       this.totalArea = totalArea;
