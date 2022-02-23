@@ -66,7 +66,7 @@ export const makePdf = (order: Order) => {
   // Verificación registrar de inmuelbles field.
   y(12);
 
-  // Cuadrado
+  // Cuadrado 1
   pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
   pdf.line(marginLeft, yCurrent, marginLeft, yCurrent + 78);
   pdf.line(marginRight, yCurrent, marginRight, yCurrent + 78);
@@ -89,11 +89,11 @@ export const makePdf = (order: Order) => {
 
   y(15);
   pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
-  // End Cuadrado
+  // End Cuadrado 1
 
   y(12);
 
-  // Cuadrado
+  // Cuadrado 2
   const rectangle2Height = yCurrent + 150;
   pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
   pdf.line(marginLeft, yCurrent, marginLeft, rectangle2Height);
@@ -119,12 +119,11 @@ export const makePdf = (order: Order) => {
 
   y(15);
   pdf.line(marginLeft, rectangle2Height, marginRight, rectangle2Height);
-  // End Cuadrado
-
-  // Cuadrado
   yCurrent = rectangle2Height;
-  y(12);
+  // End Cuadrado 2
 
+  // Cuadrado 3
+  y(12);
   const rectangle3Height = yCurrent + 60;
 
   pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
@@ -152,8 +151,74 @@ export const makePdf = (order: Order) => {
   pdf.text(order.state ? order.state : '-', rectanglesMarginRight - textWidth(order.state ? order.state : '-'), rectangle3Beggining + 15);
 
   pdf.line(marginLeft, rectangle3Height, marginRight, rectangle3Height);
-  // End Cuadrado
+  yCurrent = rectangle3Height;
+  // End Cuadrado 3
 
-  pdf.save('hola.pdf');
-  // return pdf.output('arraybuffer');
+  // Cuadrado 4
+  y(12);
+  const rectangle4Height = yCurrent + 60;
+
+  pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
+  pdf.line(marginLeft, yCurrent, marginLeft, rectangle4Height);
+  pdf.line(marginRight, yCurrent, marginRight, rectangle4Height);
+
+  pdf.setFont('Helvetica', 'bold');
+  pdf.text('Informe del Dominio:', rectanglesMarginLeft, y(15));
+
+  y(3);
+  pdf.line(rectanglesMarginLeft, yCurrent, textWidth('Informe del Dominio:') + textWidth('Informe del'), yCurrent);
+
+  pdf.setFont('helvetica', 'normal');
+
+  pdf.text('MATRICULA: ', rectanglesMarginLeft, y(15));
+  pdf.text(order.enrollmentNumber ? order.enrollmentNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 30, yCurrent);
+
+  pdf.text('FOLIO: ', rectanglesMarginLeft, y(15));
+  pdf.text(order.folioNumber ? order.folioNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 30, yCurrent);
+
+  pdf.text('TOMO: ', rectanglesMarginLeft + textWidth('MATRICULA: ') + 150, yCurrent);
+  pdf.text(order.volumeNumer ? order.volumeNumer.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 160 + textWidth('TOMO: '), yCurrent);
+
+  pdf.text('AÑO: ', rectanglesMarginLeft + textWidth('MATRICULA: ') + 350, yCurrent);
+  pdf.text(order.yearNumber ? order.yearNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 360 + textWidth('AÑO: '), yCurrent);
+
+  pdf.line(marginLeft, rectangle4Height, marginRight, rectangle4Height);
+  yCurrent = rectangle4Height;
+  // End Cuadrado 4
+
+  // Cuadrado 5
+  y(12);
+  const rectangle5Height = yCurrent + 200;
+
+  pdf.line(marginLeft, yCurrent, marginRight, yCurrent);
+  pdf.line(marginLeft, yCurrent, marginLeft, rectangle5Height);
+  pdf.line(marginRight, yCurrent, marginRight, rectangle5Height);
+
+  pdf.setFont('Helvetica', 'bold');
+  pdf.text('Observaciones: ', rectanglesMarginLeft, y(15));
+
+  y(3);
+  pdf.line(rectanglesMarginLeft, yCurrent, textWidth('Observaciones: ') + textWidth('Observac'), yCurrent);
+  pdf.setFont('helvetica', 'normal');
+
+  pdf.text(
+    order.observations ? order.observations : '-',
+    rectanglesMarginLeft,
+    y(15),
+    { align: 'justify', maxWidth: rectanglesMarginRight },
+  );
+
+  pdf.line(marginLeft, rectangle5Height, marginRight, rectangle5Height);
+  yCurrent = rectangle5Height;
+  // End Cuadrado 5
+
+  pdf.text('COSTO DEL INFORME: $ ', rectanglesMarginLeft, y(25));
+  pdf.text(order.orderAmmount ? order.orderAmmount.toString() : '-', rectanglesMarginLeft + textWidth('COSTO DEL INFORME: $ '), yCurrent);
+
+  pdf.text('VERIFICADOR: ', width / 2, y(15));
+
+  pdf.text('INFORMADO EL DÍA: ', rectanglesMarginLeft, y(15));
+  pdf.text(order.informedDate ? order.informedDate : '-', rectanglesMarginLeft + textWidth('INFORMADO EL DÍA: '), yCurrent);
+
+  return pdf.output('arraybuffer');
 };
