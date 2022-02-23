@@ -1,6 +1,6 @@
 import { AnySchema, ValidationError } from 'yup';
 import { Request, Response, NextFunction } from 'express';
-import { log } from '../logger';
+import { log } from '../helpers/logger';
 
 export const validateRequest = (schema: AnySchema) => async (req: Request, res: Response, next: NextFunction) => {
   await schema.validate({ body: req.body, query: req.query, params: req.params }, { abortEarly: false })

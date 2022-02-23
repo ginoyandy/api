@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { log } from '../logger/index';
+import { log } from '../helpers/logger';
 
 /* DB Keys */
 const mongoAppUser = process.env.MONGODB_USER;
