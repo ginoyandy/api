@@ -79,10 +79,10 @@ export const makePdf = (order: Order) => {
 
   pdf.setFont('helvetica', 'normal');
   pdf.text('Fecha de solicitud: ', rectanglesMarginLeft, y(15));
-  pdf.text(order.orderedDate ? order.orderedDate : '-', rectanglesMarginLeft + textWidth('Fecha de solicitud: ') + 10, yCurrent);
+  pdf.text(order.orderedDate ? order.orderedDate.toISOString().split('T')[0] : '-', rectanglesMarginLeft + textWidth('Fecha de solicitud: ') + 10, yCurrent);
 
-  pdf.text('Nro. Solicitud: ', rectanglesMarginRight - textWidth('Nro. Solicitud: ') - textWidth(order.number ? order.number : '-'), yCurrent);
-  pdf.text(order.number ? order.number : '-', rectanglesMarginRight - textWidth(order.number ? order.number : '-'), yCurrent);
+  pdf.text('Nro. Solicitud: ', rectanglesMarginRight - textWidth('Nro. Solicitud: ') - textWidth(order.orderNumber ? order.orderNumber : '-'), yCurrent);
+  pdf.text(order.orderNumber ? order.orderNumber : '-', rectanglesMarginRight - textWidth(order.orderNumber ? order.orderNumber : '-'), yCurrent);
 
   pdf.text('BANCO MACRO S.A', rectanglesMarginLeft, y(15));
   pdf.text('Sucursal: ', rectanglesMarginLeft, y(15));
@@ -219,7 +219,7 @@ export const makePdf = (order: Order) => {
   pdf.text('VERIFICADOR: ', width / 2, y(15));
 
   pdf.text('INFORMADO EL DÍA: ', rectanglesMarginLeft, y(15));
-  pdf.text(order.informedDate ? order.informedDate : '-', rectanglesMarginLeft + textWidth('INFORMADO EL DÍA: '), yCurrent);
+  pdf.text(order.informedDate ? order.informedDate.toISOString().split('T')[0] : '-', rectanglesMarginLeft + textWidth('INFORMADO EL DÍA: '), yCurrent);
 
   pdf.save('pdfmaster.pdf');
   return pdf.output('arraybuffer');
