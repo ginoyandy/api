@@ -27,6 +27,7 @@ export class Order {
     domain: string;
     registryEnterNumber: string;
     district: string;
+    bankName: string;
     constructor(
       registryEnterNumber: string,
       domain: string,
@@ -53,6 +54,7 @@ export class Order {
       office: string,
       remittance: string,
       district: string,
+      bankName: string,
     ) {
       this.district = district;
       this.registryEnterNumber = registryEnterNumber;
@@ -79,5 +81,6 @@ export class Order {
       this.owners = owners;
       this.totalArea = totalArea;
       this.office = office;
+      this.bankName = bankName;
     }
 }
