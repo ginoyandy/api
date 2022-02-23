@@ -1,10 +1,13 @@
 import { Owner } from './owner.model';
 
 export class Order {
-    orderedDate: string;
-    number: string;
+    orderedDate: Date;
+    orderNumber: string;
     owners: Owner[];
     adress: string;
+    streetNumber: string;
+    adressFloor: string;
+    apartmentNumber: string;
     city: string;
     department: string;
     state: string;
@@ -14,12 +17,26 @@ export class Order {
     yearNumber: number;
     observations: string;
     orderAmmount: number;
-    informedDate: string;
+    informedDate: Date;
     totalArea: number;
     office: string;
+    remittance: string;
+    providerFactory: string;
+    searchBy: string;
+    orderType: string;
+    domain: string;
+    registryEnterNumber: string;
+    district: string;
     constructor(
-      orderedDate: string,
-      number: string,
+      registryEnterNumber: string,
+      domain: string,
+      apartmentNumber: string,
+      streetNumber: string,
+      orderType: string,
+      searchBy: string,
+      providerFactory: string,
+      orderedDate: Date,
+      orderNumber: string,
       adress: string,
       city: string,
       department: string,
@@ -30,13 +47,24 @@ export class Order {
       yearNumber: number,
       observations: string,
       orderAmmount: number,
-      informedDate: string,
+      informedDate: Date,
       owners: Owner[],
       totalArea: number,
       office: string,
+      remittance: string,
+      district: string,
     ) {
+      this.district = district;
+      this.registryEnterNumber = registryEnterNumber;
+      this.domain = domain;
+      this.apartmentNumber = apartmentNumber;
+      this.streetNumber = streetNumber;
+      this.orderType = orderType;
+      this.searchBy = searchBy;
+      this.providerFactory = providerFactory;
+      this.remittance = remittance;
       this.orderedDate = orderedDate;
-      this.number = number;
+      this.orderNumber = orderNumber;
       this.adress = adress;
       this.city = city;
       this.department = department;
