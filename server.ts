@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { usersRouter } from './src/routes/user.routes';
 import 'dotenv/config';
-import { makePdf } from './src/service/pdf.service';
+import { ordersRouter } from './src/routes/order.routes';
 
 const app = express();
 
@@ -16,7 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get('/ping', makePdf);
+app.use('/orders', ordersRouter);
 app.use('/users', usersRouter);
 
 app.listen(process.env.PORT || 8080, () => {

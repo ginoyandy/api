@@ -1,8 +1,9 @@
-export class Request {
-    requestDate: string;
-    number: number;
-    holderFirsName: string
-    holderLastName: string;
+import { Owner } from './owner.model';
+
+export class Order {
+    orderedDate: string;
+    number: string;
+    owners: Owner[];
     adress: string;
     city: string;
     department: string;
@@ -14,11 +15,10 @@ export class Request {
     observations: string;
     requestAmmount: number;
     informedDate: string;
-
+    totalArea: number;
     constructor(
-      requestDate: string,
-      number: number,
-      holderLastName: string,
+      orderedDate: string,
+      number: string,
       adress: string,
       city: string,
       department: string,
@@ -30,10 +30,11 @@ export class Request {
       observations: string,
       requestAmmount: number,
       informedDate: string,
+      owners: Owner[],
+      totalArea: number,
     ) {
-      this.requestDate = requestDate;
+      this.orderedDate = orderedDate;
       this.number = number;
-      this.holderLastName = holderLastName;
       this.adress = adress;
       this.city = city;
       this.department = department;
@@ -45,5 +46,7 @@ export class Request {
       this.observations = observations;
       this.requestAmmount = requestAmmount;
       this.informedDate = informedDate;
+      this.owners = owners;
+      this.totalArea = totalArea;
     }
 }
