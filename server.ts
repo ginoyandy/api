@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { usersRouter } from './src/routes/user.routes';
 import 'dotenv/config';
-import { ordersRouter } from './src/routes/order.routes';
+import { ordersRouter } from './src/routes/orders.routes';
 
 const app = express();
 
