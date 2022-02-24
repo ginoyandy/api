@@ -6,7 +6,17 @@ import { OrderSchema } from '../data/entities/Order';
 export const addOrder = async (orders: Order[]) => {
   const OrderModel = mongoose.model('Order', OrderSchema);
   try {
-    return OrderModel.insertMany(orders);
+    return await OrderModel.insertMany(orders);
+  } catch (error) {
+    log.error(error);
+    return error;
+  }
+};
+
+export const getOrderById = async (id: string) => {
+  const OrderModel = mongoose.model('Order', OrderSchema);
+  try {
+    return await OrderModel.findById(id);
   } catch (error) {
     log.error(error);
     return error;

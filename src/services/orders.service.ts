@@ -1,10 +1,10 @@
 import * as XLSX from 'xlsx';
 import { log } from '../shared/helpers/logger';
 import { Order } from '../data/models/Order';
-import { addOrder } from '../repositories/orders.repository';
+import { addOrder, getOrderById } from '../repositories/orders.repository';
 import { keyMap } from '../shared/order.map';
 import { uploadFile } from './files.service';
-import { result } from 'lodash';
+import { makePdf } from './pdf.service';
 
 export const createOrderBody = async (bytesArray: Object) => {
   try {
@@ -37,12 +37,22 @@ export const createOrderBody = async (bytesArray: Object) => {
     };
     await uploadFile(bytesArray, filname, false)
       .then((x) => returnObject.uploaded = x);
-    return await addOrder(ordersArray)
+    await addOrder(ordersArray)
       .then((x) => returnObject.orders = x)
-      .catch((error) => log.error(error))
-      .finally(() => returnObject);
+      .catch((error) => log.error(error));
+    return returnObject;
   } catch (e) {
     log.error(e);
     return e.message;
+  }
+};
+
+export const getPDF = async (id: string) => {
+  try {
+    const pdfData: any = await getOrderById(id);
+    
+    const pdf = makePdf(pdfData);
+
+    
   }
 };
