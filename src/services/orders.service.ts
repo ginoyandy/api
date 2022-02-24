@@ -1,7 +1,7 @@
 import * as XLSX from 'xlsx';
-import { log } from '../shared/helpers/logger';
 import { Order } from '../data/models/Order';
 import { addOrder, getOrderById } from '../repositories/orders.repository';
+import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
 import { uploadFile } from './files.service';
 import { makePdf } from './pdf.service';
@@ -12,7 +12,9 @@ export const createOrderBody = async (bytesArray: Object) => {
     const workbook = XLSX.read(bytesArray);
 
     // Now if the name is undefined, take a string if not take the first sheet.
-    const sheetName = workbook.Props?.SheetNames ? workbook.Props.SheetNames[0] : '';
+    const sheetName = workbook.Props?.SheetNames
+      ? workbook.Props.SheetNames[0]
+      : '';
 
     // We have only one sheet, let's read it.
     const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
@@ -23,7 +25,9 @@ export const createOrderBody = async (bytesArray: Object) => {
       keyMap.forEach((key: string, value: string) => {
         let currentValue = order[value];
         if (key === ('orderedDate' || 'informedDate')) {
-          currentValue = new Date((order[value] * 24 * 60 * 60 * 1000) - (70 * 365 * 24 * 60 * 60 * 1000));
+          currentValue = new Date(
+            order[value] * 24 * 60 * 60 * 1000 - 70 * 365 * 24 * 60 * 60 * 1000,
+          );
         }
         newOrder[key] = currentValue;
       });
@@ -35,10 +39,11 @@ export const createOrderBody = async (bytesArray: Object) => {
       uploaded: [],
       orders: [],
     };
-    await uploadFile(bytesArray, filname, false)
-      .then((x) => returnObject.uploaded = x);
+    await uploadFile(bytesArray, filname, false).then(
+      (x) => (returnObject.uploaded = x),
+    );
     await addOrder(ordersArray)
-      .then((x) => returnObject.orders = x)
+      .then((x) => (returnObject.orders = x))
       .catch((error) => log.error(error));
     return returnObject;
   } catch (e) {
@@ -50,9 +55,10 @@ export const createOrderBody = async (bytesArray: Object) => {
 export const getPDF = async (id: string) => {
   try {
     const pdfData: any = await getOrderById(id);
-    
     const pdf = makePdf(pdfData);
-
-    
+    return pdf;
+  } catch (e) {
+    log.error(e);
+    throw new Error(e);
   }
 };
