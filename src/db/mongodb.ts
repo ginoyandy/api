@@ -8,7 +8,7 @@ const DB_NAME = process.env.ENVIROMENT === 'PRODUCTION'
   : 'HQ-Asociados-TEST';
 
 export const connectDB = async () => {
-  const databaseURI = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@hyqasociados.xaoje.mongodb.net/${DB_NAME}?retryWrites=true&w=majority;`;
+  const databaseURI = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@hyqasociados.xaoje.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
   log.info(`Database URI = ${databaseURI}`);
   await mongoose
     .connect(databaseURI, {

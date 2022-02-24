@@ -6,5 +6,5 @@ import { createUserSchema } from '../data/validation-schemas/user.schema';
 
 export const usersRouter = express.Router();
 
-usersRouter.get('/', validateRequest(createUserSchema), createUserHandler);
+usersRouter.post('/', validateRequest(createUserSchema), createUserHandler);
 usersRouter.post('/login', validateRequest(loginSchema), loginHandler);
