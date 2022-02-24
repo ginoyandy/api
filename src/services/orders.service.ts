@@ -1,35 +1,9 @@
 import * as XLSX from 'xlsx';
-import { log } from '../helpers/logger';
-import { Order } from '../data/models/order.model';
-
-const keyMap = new Map<string, string>([
-  ['REMITO', 'remittance'],
-  ['Fecha Envio al Proveedor', 'orderedDate'],
-  ['Empresa Proveedora', 'providerFactory'],
-  ['Solicitud', 'orderNumber'],
-  ['Sucursal', 'office'],
-  ['Busqueda', 'searchBy'],
-  ['Tramite', 'orderType'],
-  ['Denominacion', 'firstName'],
-  ['Nro Documento', 'dni'],
-  ['Tipo de Persona', 'ownerType'],
-  ['Tipo de Documento', 'dniType'],
-  ['Domicilio Calle', 'adress'],
-  ['Numero', 'streetNumber'],
-  ['Piso', 'adressFloor'],
-  ['Departamento', 'apartmentNumber'],
-  ['Localidad', 'city'],
-  ['Dto/Distrito/Partido', 'department'],
-  ['Provincia', 'state'],
-  ['Matricula N°', 'enrollmentNumber'],
-  ['Tomo', 'volumeNumber'],
-  ['Folio', 'folioNumber'],
-  ['Dominio', 'domain'],
-  ['N° entrada a Registro', 'registryEnterNumber'],
-  ['Año de Inscripción', 'yearNumber'],
-  ['Dpto/Distrito/Partido', 'district'],
-  ['Observaciones', 'observations'],
-]);
+import { log } from '../shared/helpers/logger';
+import { Order } from '../data/models/Order';
+import { addOrder } from '../repositories/orders.repository';
+import { keyMap } from '../shared/order.map';
+import { uploadFile } from './files.service';
 
 export const createOrderBody = async (bytesArray: Object) => {
   try {
@@ -54,7 +28,9 @@ export const createOrderBody = async (bytesArray: Object) => {
       });
       ordersArray.push(newOrder);
     });
-    return ordersArray;
+    const filname = `${new Date().toISOString().split('T')[0]}.`;
+    await uploadFile(bytesArray, filname, false);
+    return await addOrder(ordersArray);
   } catch (e) {
     log.error(e);
     return e.message;

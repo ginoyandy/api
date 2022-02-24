@@ -5,7 +5,7 @@ import 'dotenv/config';
 import { usersRouter } from './src/routes/user.routes';
 import { ordersRouter } from './src/routes/orders.routes';
 import { connectDB } from './src/db/mongodb';
-import { log } from './src/helpers/logger';
+import { log } from './src/shared/helpers/logger';
 
 const app = express();
 

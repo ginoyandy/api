@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Order } from '../data/models/order.model';
-import { log } from '../helpers/logger';
+import { Order } from '../data/models/Order';
+import { log } from '../shared/helpers/logger';
 import { createOrderBody } from '../services/orders.service';
 import { makePdf } from '../services/pdf.service';
 

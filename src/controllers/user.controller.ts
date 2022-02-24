@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { log } from '../helpers/logger';
+import { log } from '../shared/helpers/logger';
 import { createUser, loginUser } from '../services/user.service';
 
 export const createUserHandler = async (req:Request, res:Response): Promise<Response> => {

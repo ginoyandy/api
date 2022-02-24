@@ -1,4 +1,4 @@
-import User, { UserDocument } from '../data/models/user.model';
+import User, { UserDocument } from '../data/entities/User';
 
 export async function createUser(input: UserDocument) {
   try {

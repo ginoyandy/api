@@ -1,6 +1,6 @@
 import express from 'express';
 import { createOrderReport, createOrderObject } from '../controllers/orders.controller';
-import { OrderSchema } from '../data/schemas/order.schema';
+import { OrderSchema } from '../data/validation-schemas/order.schema';
 import { validateRequest } from '../middlewares/validateRequests';
 
 export const ordersRouter = express.Router();

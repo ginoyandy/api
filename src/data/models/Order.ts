@@ -1,4 +1,4 @@
-import { Owner } from './owner.model';
+import { Owner } from './Owner';
 
 export class Order {
     orderedDate: Date;
@@ -28,6 +28,11 @@ export class Order {
     registryEnterNumber: string;
     district: string;
     bankName: string;
+    firstName: string;
+    lastName: string;
+    dni: string;
+    dniType: string;
+    ownerType: string;
     constructor(
       registryEnterNumber: string,
       domain: string,
@@ -55,6 +60,11 @@ export class Order {
       remittance: string,
       district: string,
       bankName: string,
+      firstName: string,
+      lastName: string,
+      dni: string,
+      dniType: string,
+      ownerType: string,
     ) {
       this.district = district;
       this.registryEnterNumber = registryEnterNumber;
@@ -82,5 +92,10 @@ export class Order {
       this.totalArea = totalArea;
       this.office = office;
       this.bankName = bankName;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.dni = dni;
+      this.dniType = dniType;
+      this.ownerType = ownerType;
     }
 }

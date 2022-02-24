@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import { readFileSync } from 'fs';
-import { Order } from '../data/models/order.model';
-import { Owner } from '../data/models/owner.model';
+import { Order } from '../data/models/Order';
+import { Owner } from '../data/models/Owner';
 
 // Helper function
 function base64Encode(file: string): any {

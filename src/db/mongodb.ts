@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { log } from '../helpers/logger';
+import { log } from '../shared/helpers/logger';
 
 export const connectDB = async () => {
   const databaseURI = process.env.DATABASE_URI || 'development';

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
-import User from '../data/models/user.model';
+import User from '../data/entities/User';
 
 export async function extractToken(
   req: Request,
