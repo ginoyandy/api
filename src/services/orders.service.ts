@@ -4,6 +4,7 @@ import { Order } from '../data/models/Order';
 import { addOrder } from '../repositories/orders.repository';
 import { keyMap } from '../shared/order.map';
 import { uploadFile } from './files.service';
+import { result } from 'lodash';
 
 export const createOrderBody = async (bytesArray: Object) => {
   try {
@@ -28,9 +29,18 @@ export const createOrderBody = async (bytesArray: Object) => {
       });
       ordersArray.push(newOrder);
     });
-    const filname = `${new Date().toISOString().split('T')[0]}.`;
-    await uploadFile(bytesArray, filname, false);
-    return await addOrder(ordersArray);
+    const filname = `${new Date().toISOString().split('.')[0]}.xlsx`;
+
+    const returnObject: any = {
+      uploaded: [],
+      orders: [],
+    };
+    await uploadFile(bytesArray, filname, false)
+      .then((x) => returnObject.uploaded = x);
+    return await addOrder(ordersArray)
+      .then((x) => returnObject.orders = x)
+      .catch((error) => log.error(error))
+      .finally(() => returnObject);
   } catch (e) {
     log.error(e);
     return e.message;
