@@ -6,6 +6,7 @@ import { usersRouter } from './src/routes/user.routes';
 import { ordersRouter } from './src/routes/orders.routes';
 import { connectDB } from './src/db/mongodb';
 import { log } from './src/shared/helpers/logger';
+import { tempChecker } from './src/shared/helpers/temp';
 
 const app = express();
 
@@ -31,6 +32,7 @@ const startServer = async () => {
 };
 
 (async () => {
+  await tempChecker();
   await connectDB();
   await startServer();
 })();

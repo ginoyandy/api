@@ -19,6 +19,7 @@ const textWidth = (text: string) => pdf.getTextWidth(text);
 
 export const makePdf = (order: Order) => {
   // Utils region
+  const pdfName: string = `${new Date().toISOString().split('.')[0]}.pdf`;
   const width = pdf.internal.pageSize.getWidth();
   const marginLeft = 40;
   const rectanglesMarginLeft = 50;
@@ -221,6 +222,6 @@ export const makePdf = (order: Order) => {
   pdf.text('INFORMADO EL DÍA: ', rectanglesMarginLeft, y(15));
   pdf.text(order.informedDate ? order.informedDate.toISOString().split('T')[0] : '-', rectanglesMarginLeft + textWidth('INFORMADO EL DÍA: '), yCurrent);
 
-  pdf.save('pdfmaster.pdf');
-  return pdf.output('arraybuffer');
+  pdf.save(`temp/${pdfName}`);
+  return { fileName: pdfName, arrayBuffer: pdf.output('arraybuffer') };
 };

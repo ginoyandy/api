@@ -36,11 +36,12 @@ export const createOrderBody = async (bytesArray: Object) => {
     const filname = `${new Date().toISOString().split('.')[0]}.xlsx`;
 
     const returnObject: any = {
-      uploaded: [],
-      orders: [],
+      uploaded: null,
+      orders: null,
     };
     await uploadFile(bytesArray, filname, false).then(
       (x) => (returnObject.uploaded = x),
+      () => (returnObject.uploaded = null),
     );
     await addOrder(ordersArray)
       .then((x) => (returnObject.orders = x))
@@ -55,10 +56,11 @@ export const createOrderBody = async (bytesArray: Object) => {
 export const getPDF = async (id: string) => {
   try {
     const pdfData: any = await getOrderById(id);
-    const pdf = makePdf(pdfData);
-    return pdf;
+    const { fileName, arrayBuffer } = makePdf(pdfData);
+    await uploadFile(arrayBuffer, fileName, true);
+    return fileName;
   } catch (e) {
     log.error(e);
-    throw new Error(e);
+    return e.message;
   }
 };
