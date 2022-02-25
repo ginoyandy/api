@@ -7,5 +7,5 @@ export const ordersRouter = express.Router();
 
 ordersRouter.get('/pdf/:id', getOrderPDF);
 ordersRouter.post('/excel', createOrderObject);
-ordersRouter.put('/:id', validateRequest(OrderSchema), modifyOrderReport); // Order id corregida insertada en mongo --> retorna un id del order insertado.
+ordersRouter.put('/:id', validateRequest(OrderSchema), modifyOrderReport);
 // ordersRouter.get('/pdf');
