@@ -22,3 +22,13 @@ export const getOrderById = async (id: string) => {
     return error;
   }
 };
+
+export const modifyExistentOrder = async (order: Order, orderId: string) => {
+  const OrderModel = mongoose.model('Order', OrderSchema);
+  try {
+    return await OrderModel.findByIdAndUpdate(orderId, order);
+  } catch (error) {
+    log.error(error);
+    return error;
+  }
+};

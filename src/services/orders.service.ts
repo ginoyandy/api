@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx';
 import { Order } from '../data/models/Order';
-import { addOrder, getOrderById } from '../repositories/orders.repository';
+import { addOrder, getOrderById, modifyExistentOrder } from '../repositories/orders.repository';
 import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
 import { uploadFile } from './files.service';
@@ -59,6 +59,15 @@ export const getPDF = async (id: string) => {
     const { fileName, arrayBuffer } = makePdf(pdfData);
     await uploadFile(arrayBuffer, fileName, true);
     return fileName;
+  } catch (e) {
+    log.error(e);
+    return e.message;
+  }
+};
+
+export const modifyOrder = async (order: Order, orderId: string) => {
+  try {
+    return await modifyExistentOrder(order, orderId);
   } catch (e) {
     log.error(e);
     return e.message;

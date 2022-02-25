@@ -2,20 +2,17 @@ import { Request, Response } from 'express';
 import fs from 'fs';
 import { Order } from '../data/models/Order';
 import { log } from '../shared/helpers/logger';
-import { createOrderBody, getPDF } from '../services/orders.service';
+import { createOrderBody, getPDF, modifyOrder } from '../services/orders.service';
 import { tempCleaner } from '../shared/helpers/temp';
 
 export const modifyOrderReport = async (req: Request, res: Response): Promise<Response> => {
   try {
     const requestData: Order = req.body;
-    return res.status(200).json({
-      message: 'ok',
-    });
+    const { id } = req.params;
+    return await modifyOrder(requestData, id)
+      .then((result) => res.status(200).json(result));
   } catch (e) {
-    log.error(e);
-    return res.status(400).json({
-      message: e,
-    });
+    return res.status(400).json(e);
   }
 };
 
