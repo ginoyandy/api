@@ -39,10 +39,10 @@ export const createOrderBody = async (bytesArray: Object) => {
       uploaded: null,
       orders: null,
     };
-    await uploadFile(bytesArray, filname, false).then(
-      (x) => (returnObject.uploaded = x),
-      () => (returnObject.uploaded = null),
-    );
+    // await uploadFile(bytesArray, filname, false).then(
+    //   (x) => (returnObject.uploaded = x),
+    //   () => (returnObject.uploaded = null),
+    // );
     await addOrder(ordersArray)
       .then((x) => (returnObject.orders = x))
       .catch((error) => log.error(error));
@@ -57,7 +57,7 @@ export const getPDF = async (id: string) => {
   try {
     const pdfData: any = await getOrderById(id);
     const { fileName, arrayBuffer } = makePdf(pdfData);
-    await uploadFile(arrayBuffer, fileName, true);
+    // await uploadFile(arrayBuffer, fileName, true);
     return fileName;
   } catch (e) {
     log.error(e);
