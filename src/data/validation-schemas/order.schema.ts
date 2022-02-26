@@ -9,7 +9,7 @@ export const OrderValidationSchema = object({
     owners: array(
       object({
         firstName: string().required(),
-        lastName: string().required(),
+        lastName: string(),
         dni: string().required(),
       }),
     ),
