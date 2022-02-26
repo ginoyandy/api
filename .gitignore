@@ -10,4 +10,4 @@ node_modules
 
 # Env
 .env
-prod.env
+.env.prod
