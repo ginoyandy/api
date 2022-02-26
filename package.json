@@ -6,7 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "start": "node dist/index.js",
+    "postinstall": "tsc",
+    "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
