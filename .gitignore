@@ -1,3 +1,9 @@
+# Dependencies of the project.
 node_modules
+
+# Temporal files created.
 /temp
+.DS_Store
+
+# Build path
 /dist

@@ -3,7 +3,7 @@ import { Order } from '../data/models/Order';
 import { addOrder, getOrderById, modifyExistentOrder } from '../repositories/orders.repository';
 import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
-import { makePdf } from './pdf.service';
+import { PDF } from './pdf.service';
 import { sendEmail } from './email.service';
 
 export const createOrderBody = async (bytesArray: Object) => {
@@ -50,7 +50,10 @@ export const createOrderBody = async (bytesArray: Object) => {
 export const getPDF = async (id: string) => {
   try {
     const pdfData: any = await getOrderById(id);
-    const { fileName } = makePdf(pdfData);
+
+    const pdf = new PDF();
+    const fileName = pdf.makePdf(pdfData);
+
     await sendEmail(fileName);
     return fileName;
   } catch (e) {
