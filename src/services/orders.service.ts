@@ -66,7 +66,16 @@ export const getPDF = async (id: string) => {
 
 export const modifyOrder = async (order: Order, orderId: string) => {
   try {
-    return await modifyExistentOrder(order, orderId);
+    return await modifyExistentOrder(order, orderId)
+      .then((result) => {
+        if (result) {
+          return result;
+        }
+        throw Error('Not modified');
+      })
+      .catch((error) => {
+        throw Error(error);
+      });
   } catch (e) {
     log.error(e);
     throw Error(e);

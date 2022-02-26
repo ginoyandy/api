@@ -1,7 +1,9 @@
 {
   "name": "hq-asociados",
   "version": "1.0.0",
-  "engines": { "node": "14.18.3" },
+  "engines": {
+    "node": "14.18.3"
+  },
   "description": "API Para gestion de datos",
   "author": "Gino Massei, Andres Bardagi",
   "license": "MIT",

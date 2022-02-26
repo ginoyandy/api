@@ -4,13 +4,29 @@ import { log } from '../shared/helpers/logger';
 import { OrderSchema } from '../data/entities/Order';
 
 export const addOrder = async (orders: Order[]) => {
+  // CODIGO NEGRERO 2.0 ULTRANASTY
+  // ALGUN DIA MEJORAR
   const OrderModel = mongoose.model('Order', OrderSchema);
+  const orderNumbers: string[] = [];
+  orders.forEach((order) => orderNumbers.push(order.orderNumber));
   try {
-    return await OrderModel.insertMany(orders)
-      .then((result) => result)
-      .catch((error) => {
-        throw Error(error);
+    let insertError: any = null;
+    await OrderModel.insertMany(orders, { ordered: false })
+      .catch((error) => insertError = error);
+
+    if (insertError) {
+      // Ensable the return object.
+      insertError.writeErrors.forEach((writeError: any) => {
+        if (writeError.err.op) {
+          delete writeError.err.op._id;
+          OrderModel.findOneAndUpdate({ orderNumber: writeError.err.op.orderNumber }, writeError.err.op, { new: true })
+            .catch((err: any) => {
+              throw Error(err);
+            });
+        }
       });
+    }
+    return await OrderModel.find({ orderNumber: { $in: orderNumbers } });
   } catch (error) {
     log.error(error);
     throw Error(error);
