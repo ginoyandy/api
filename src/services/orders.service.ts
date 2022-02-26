@@ -49,7 +49,7 @@ export const createOrderBody = async (bytesArray: Object) => {
     return returnObject;
   } catch (e) {
     log.error(e);
-    return e.message;
+    throw Error(e);
   }
 };
 
@@ -61,7 +61,7 @@ export const getPDF = async (id: string) => {
     return fileName;
   } catch (e) {
     log.error(e);
-    return e.message;
+    throw Error(e);
   }
 };
 
@@ -70,6 +70,6 @@ export const modifyOrder = async (order: Order, orderId: string) => {
     return await modifyExistentOrder(order, orderId);
   } catch (e) {
     log.error(e);
-    return e.message;
+    throw Error(e);
   }
 };

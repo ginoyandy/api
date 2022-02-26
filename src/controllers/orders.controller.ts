@@ -20,7 +20,8 @@ export const createOrderObject = async (req: any, res: Response): Promise<Respon
   try {
     const file = req.files?.fileName.data;
     return await createOrderBody(file)
-      .then((result) => res.status(200).json(result));
+      .then((result) => res.status(200).json(result))
+      .catch((error) => res.status(400).json(error));
   } catch (e) {
     return res.status(400).json(e);
   }

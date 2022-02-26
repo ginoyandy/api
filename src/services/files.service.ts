@@ -8,6 +8,6 @@ export const uploadFile = async (file: any, fileName: string, isPDF: boolean) =>
     return await dbx.filesUpload({ path: `${filePath}/${fileName}`, contents: file });
   } catch (uploadErr) {
     log.error(uploadErr);
-    return uploadErr;
+    throw Error(uploadErr);
   }
 };

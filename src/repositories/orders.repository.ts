@@ -9,7 +9,7 @@ export const addOrder = async (orders: Order[]) => {
     return await OrderModel.insertMany(orders);
   } catch (error) {
     log.error(error);
-    return error;
+    throw Error(error);
   }
 };
 
@@ -29,6 +29,6 @@ export const modifyExistentOrder = async (order: Order, orderId: string) => {
     return await OrderModel.findByIdAndUpdate(orderId, order);
   } catch (error) {
     log.error(error);
-    return error;
+    throw Error(error);
   }
 };

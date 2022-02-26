@@ -32,6 +32,6 @@ export const sendEmail = async (file: any, fileName: string) => {
       .catch((error) => log.error(error));
   } catch (error) {
     log.error(error);
-    return error;
+    throw Error(error);
   }
 };
