@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import fs from 'fs';
 import { Order } from '../data/models/Order';
 import { log } from '../shared/helpers/logger';
-import { createOrderBody, getPDF, modifyOrder } from '../services/orders.service';
+import {
+  createOrderBody, getPDF, modifyOrder, getOrders,
+} from '../services/orders.service';
 import { tempCleaner } from '../shared/helpers/temp';
 
 export const modifyOrderReport = async (req: Request, res: Response): Promise<Response> => {
@@ -10,7 +12,8 @@ export const modifyOrderReport = async (req: Request, res: Response): Promise<Re
     const requestData: Order = req.body;
     const { id } = req.params;
     return await modifyOrder(requestData, id)
-      .then((result) => res.status(200).json(result));
+      .then((result) => res.status(200).json(result))
+      .catch((error) => res.status(304).json(error));
   } catch (e) {
     return res.status(400).json(e);
   }
@@ -21,7 +24,7 @@ export const createOrderObject = async (req: any, res: Response): Promise<Respon
     const file = req.files?.fileName.data;
     return await createOrderBody(file)
       .then((result) => res.status(200).json(result))
-      .catch((error) => res.status(400).json(error));
+      .catch(() => res.status(422).json({ error: 'Entrada duplicada' }));
   } catch (e) {
     return res.status(400).json(e);
   }
@@ -43,6 +46,16 @@ export const getOrderPDF = async (req: Request, res: Response): Promise<any> => 
         }
         tempCleaner();
       });
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+};
+
+export const getAllOrders = async (req: Request, res: Response): Promise<any> => {
+  try {
+    return await getOrders()
+      .then((result) => res.status(302).json(result))
+      .catch((error) => res.status(400).json(error));
   } catch (e) {
     return res.status(400).json(e);
   }

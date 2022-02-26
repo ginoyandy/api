@@ -1,6 +1,8 @@
 import * as XLSX from 'xlsx';
 import { Order } from '../data/models/Order';
-import { addOrder, getOrderById, modifyExistentOrder } from '../repositories/orders.repository';
+import {
+  addOrder, getOrderById, modifyExistentOrder, getAll,
+} from '../repositories/orders.repository';
 import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
 import { PDF } from './pdf.service';
@@ -35,12 +37,12 @@ export const createOrderBody = async (bytesArray: Object) => {
     });
     const filname = `${new Date().toISOString().split('.')[0]}.xlsx`;
 
-    let orders = null;
     await sendEmail(filname, bytesArray);
-    await addOrder(ordersArray)
-      .then((x) => (orders = x))
-      .catch((error) => log.error(error));
-    return orders;
+    return await addOrder(ordersArray)
+      .then((orders) => orders)
+      .catch((error) => {
+        throw Error(error);
+      });
   } catch (e) {
     log.error(e);
     throw Error(e);
@@ -65,6 +67,15 @@ export const getPDF = async (id: string) => {
 export const modifyOrder = async (order: Order, orderId: string) => {
   try {
     return await modifyExistentOrder(order, orderId);
+  } catch (e) {
+    log.error(e);
+    throw Error(e);
+  }
+};
+
+export const getOrders = async () => {
+  try {
+    return await getAll();
   } catch (e) {
     log.error(e);
     throw Error(e);

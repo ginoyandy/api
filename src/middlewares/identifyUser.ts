@@ -6,7 +6,7 @@ export const extractToken = async (req: Request | any, res: Response, next: Next
   try {
     const authorization = req.get('authorization');
 
-    if (!authorization) { return res.status(401).json({ error: true, message: 'Invalid token' }); }
+    if (!authorization) { return res.status(498).json({ error: true, message: 'Invalid token' }); }
 
     const token = authorization && authorization.toLowerCase().startsWith('bearer')
       ? authorization.substring(7)
@@ -24,7 +24,7 @@ export const extractToken = async (req: Request | any, res: Response, next: Next
       let decodedToken = await verify(token, SECRET_TOKEN);
       decodedToken = decodedToken as DecodedToken;
 
-      if (decodedToken == null || decodedToken.id == null) { return res.status(401).json({ error: true, message: 'Invalid token' }); }
+      if (decodedToken == null || decodedToken.id == null) { return res.status(498).json({ error: true, message: 'Invalid token' }); }
 
       const user = await User.findById(decodedToken.id);
       if (user == null) { return res.status(401).json({ error: true, message: 'Invalid token' }); }
@@ -32,9 +32,9 @@ export const extractToken = async (req: Request | any, res: Response, next: Next
       req.userId = decodedToken.id;
       return next();
     }
-    return res.status(401).json({ error: true, message: 'No token provided' });
+    return res.status(498).json({ error: true, message: 'No token provided' });
   } catch (error) {
     console.log(error);
-    return res.status(401).json({ error: true, message: 'Invalid token' });
+    return res.status(498).json({ error: true, message: 'Invalid token' });
   }
 };

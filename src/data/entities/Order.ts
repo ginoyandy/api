@@ -3,7 +3,7 @@ import { OwnerSchema } from './Owner';
 
 export const OrderSchema = new Schema({
   orderedDate: Date,
-  orderNumber: String,
+  orderNumber: { type: String, unique: true },
   owners: [OwnerSchema],
   adress: String,
   streetNumber: String,
@@ -34,4 +34,6 @@ export const OrderSchema = new Schema({
   dni: String,
   dniType: String,
   ownerType: String,
+}, {
+  versionKey: false,
 });

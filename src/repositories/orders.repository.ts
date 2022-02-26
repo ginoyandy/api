@@ -6,7 +6,11 @@ import { OrderSchema } from '../data/entities/Order';
 export const addOrder = async (orders: Order[]) => {
   const OrderModel = mongoose.model('Order', OrderSchema);
   try {
-    return await OrderModel.insertMany(orders);
+    return await OrderModel.insertMany(orders)
+      .then((result) => result)
+      .catch((error) => {
+        throw Error(error);
+      });
   } catch (error) {
     log.error(error);
     throw Error(error);
@@ -28,6 +32,16 @@ export const modifyExistentOrder = async (order: any, orderId: string) => {
   try {
     delete order._id;
     return await OrderModel.findByIdAndUpdate(orderId, order, { new: true });
+  } catch (error) {
+    log.error(error);
+    throw Error(error);
+  }
+};
+
+export const getAll = async () => {
+  const OrderModel = mongoose.model('Order', OrderSchema);
+  try {
+    return await OrderModel.find();
   } catch (error) {
     log.error(error);
     throw Error(error);
