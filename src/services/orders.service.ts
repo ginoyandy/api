@@ -3,8 +3,8 @@ import { Order } from '../data/models/Order';
 import { addOrder, getOrderById, modifyExistentOrder } from '../repositories/orders.repository';
 import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
-import { uploadFile } from './files.service';
 import { makePdf } from './pdf.service';
+import { sendEmail } from './email.service';
 
 export const createOrderBody = async (bytesArray: Object) => {
   try {
@@ -35,18 +35,12 @@ export const createOrderBody = async (bytesArray: Object) => {
     });
     const filname = `${new Date().toISOString().split('.')[0]}.xlsx`;
 
-    const returnObject: any = {
-      uploaded: null,
-      orders: null,
-    };
-    // await uploadFile(bytesArray, filname, false).then(
-    //   (x) => (returnObject.uploaded = x),
-    //   () => (returnObject.uploaded = null),
-    // );
+    let orders = null;
+    await sendEmail(filname, bytesArray);
     await addOrder(ordersArray)
-      .then((x) => (returnObject.orders = x))
+      .then((x) => (orders = x))
       .catch((error) => log.error(error));
-    return returnObject;
+    return orders;
   } catch (e) {
     log.error(e);
     throw Error(e);
@@ -56,8 +50,8 @@ export const createOrderBody = async (bytesArray: Object) => {
 export const getPDF = async (id: string) => {
   try {
     const pdfData: any = await getOrderById(id);
-    const { fileName, arrayBuffer } = makePdf(pdfData);
-    // await uploadFile(arrayBuffer, fileName, true);
+    const { fileName } = makePdf(pdfData);
+    await sendEmail(fileName);
     return fileName;
   } catch (e) {
     log.error(e);
