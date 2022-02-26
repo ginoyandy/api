@@ -76,7 +76,7 @@ export class PDF {
 
     // Email field
     pdf.text(
-      'quirogayasociados@fibertel.com.ar - hyqasociados@gmail.com',
+      'informescomercialeshq@gmail.com - hqyasociados@gmail.com',
       width / 2,
       y(15),
       { align: 'center' },
