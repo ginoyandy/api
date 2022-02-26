@@ -9,9 +9,8 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node dist/server.js",
-    "postinstall": "build",
-    "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
