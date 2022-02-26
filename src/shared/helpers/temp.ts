@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { log } from '../../helpers/logger';
+import { log } from './logger';
 
 export const tempCleaner = () => {
   fs.readdir('temp/', (err, files) => {

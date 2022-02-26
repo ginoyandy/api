@@ -19,14 +19,15 @@ export const getOrderById = async (id: string) => {
     return await OrderModel.findById(id);
   } catch (error) {
     log.error(error);
-    return error;
+    throw Error(error);
   }
 };
 
-export const modifyExistentOrder = async (order: Order, orderId: string) => {
+export const modifyExistentOrder = async (order: any, orderId: string) => {
   const OrderModel = mongoose.model('Order', OrderSchema);
   try {
-    return await OrderModel.findByIdAndUpdate(orderId, order);
+    delete order._id;
+    return await OrderModel.findByIdAndUpdate(orderId, order, { new: true });
   } catch (error) {
     log.error(error);
     throw Error(error);

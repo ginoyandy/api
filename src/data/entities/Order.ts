@@ -14,7 +14,7 @@ export const OrderSchema = new Schema({
   state: String,
   enrollmentNumber: Number,
   folioNumber: Number,
-  volumeNumer: Number,
+  volumeNumber: Number,
   yearNumber: Number,
   observations: String,
   orderAmmount: Number,

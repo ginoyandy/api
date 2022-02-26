@@ -2,7 +2,7 @@ import {
   object, string, number, array, date,
 } from 'yup';
 
-export const OrderSchema = object({
+export const OrderValidationSchema = object({
   body: object({
     orderedDate: date().required(),
     orderNumber: string().required(),
@@ -22,7 +22,7 @@ export const OrderSchema = object({
     state: string().required(),
     enrollmentNumber: number().required(),
     folioNumber: number().required(),
-    volumeNumer: number().required(),
+    volumeNumber: number().required(),
     yearNumber: number().required(),
     observations: string().required(),
     orderAmmount: number().required(),
@@ -38,9 +38,11 @@ export const OrderSchema = object({
     district: string().required(),
     bankName: string().required(),
     firstName: string().required(),
-    lastName: string().required(),
+    lastName: string(),
     dni: string().required(),
     dniType: string().required(),
     ownerType: string().required(),
   }),
 });
+
+export const OrderArrayValidationSchema = array(OrderValidationSchema);
