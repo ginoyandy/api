@@ -2,11 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import User from '../data/entities/User';
 
-export async function extractToken(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export const extractToken = async (req: Request | any, res: Response, next: NextFunction) => {
   try {
     const authorization = req.get('authorization');
 
@@ -28,20 +24,17 @@ export async function extractToken(
       let decodedToken = await verify(token, SECRET_TOKEN);
       decodedToken = decodedToken as DecodedToken;
 
-      // console.log(decodedToken);
-
       if (decodedToken == null || decodedToken.id == null) { return res.status(401).json({ error: true, message: 'Invalid token' }); }
 
       const user = await User.findById(decodedToken.id);
       if (user == null) { return res.status(401).json({ error: true, message: 'Invalid token' }); }
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       req.userId = decodedToken.id;
       return next();
     }
+    return res.status(401).json({ error: true, message: 'No token provided' });
   } catch (error) {
     console.log(error);
     return res.status(401).json({ error: true, message: 'Invalid token' });
   }
-}
+};

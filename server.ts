@@ -7,6 +7,7 @@ import { ordersRouter } from './src/routes/orders.routes';
 import { connectDB } from './src/db/mongodb';
 import { log } from './src/shared/helpers/logger';
 import { tempChecker } from './src/shared/helpers/temp';
+import { extractToken } from './src/middlewares/identifyUser';
 
 const app = express();
 
@@ -15,14 +16,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 
 const corsOptions = {
-  origin: '*',
+  origin: process.env.ALLOWED_ORIGINS,
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 
-app.use('/orders', ordersRouter);
 app.use('/users', usersRouter);
+app.use(extractToken);
+app.use('/orders', ordersRouter);
 
 // Iniciamos el servidor express
 const startServer = async () => {
