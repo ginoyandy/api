@@ -34,6 +34,7 @@ export const OrderSchema = new Schema({
   dni: String,
   dniType: String,
   ownerType: String,
+  ownersObservations: String,
 }, {
   versionKey: false,
 });

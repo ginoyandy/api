@@ -18,7 +18,7 @@ export class Order {
     observations: string;
     orderAmmount: number;
     informedDate: Date;
-    totalArea: number;
+    totalArea: string;
     office: string;
     remittance: string;
     providerFactory: string;
@@ -33,6 +33,7 @@ export class Order {
     dni: string;
     dniType: string;
     ownerType: string;
+    ownersObservations: string;
     constructor(
       registryEnterNumber: string,
       domain: string,
@@ -55,7 +56,7 @@ export class Order {
       orderAmmount: number,
       informedDate: Date,
       owners: Owner[],
-      totalArea: number,
+      totalArea: string,
       office: string,
       remittance: string,
       district: string,
@@ -65,6 +66,7 @@ export class Order {
       dni: string,
       dniType: string,
       ownerType: string,
+      ownersObservations: string,
     ) {
       this.district = district;
       this.registryEnterNumber = registryEnterNumber;
@@ -97,5 +99,6 @@ export class Order {
       this.dni = dni;
       this.dniType = dniType;
       this.ownerType = ownerType;
+      this.ownersObservations = ownersObservations;
     }
 }

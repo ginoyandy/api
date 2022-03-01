@@ -6,4 +6,5 @@ export const OwnerSchema = new Schema({
   dni: String,
   dniType: String,
   ownerType: String,
+  ownership: String,
 });
