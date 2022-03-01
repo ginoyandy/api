@@ -152,6 +152,14 @@ export class PDF {
     pdf.text('TITULAR / ES: ', rectanglesMarginLeft, y(15));
 
     pdf.setFont('helvetica', 'normal');
+
+    pdf.text(
+      this.order.ownersObservations ?? '-',
+      rectanglesMarginLeft + 20 + textWidth('TITULAR / ES: '),
+      yCurrent,
+      { maxWidth: 300 },
+    );
+
     pdf.text('DNI / CUIT: ', rectanglesMarginRight - 75, yCurrent);
 
     y(3);
@@ -162,16 +170,26 @@ export class PDF {
       yCurrent,
     );
 
-    y(20);
+    y(35);
+    // For each owner, create a line.
     this.order.owners.forEach((owner: Owner) => {
       pdf.text(
+        owner.ownership ?? '-',
+        rectanglesMarginLeft + textWidth(owner.ownership ?? '-'),
+        yCurrent,
+      );
+
+      pdf.text(
         owner.firstName ?? '-',
-        rectanglesMarginLeft + textWidth('TITULAR / ES: '),
+        rectanglesMarginLeft
+          + textWidth('TITULAR / ES: ')
+          + textWidth(owner.ownership ?? '-'),
         yCurrent,
       );
       pdf.text(
         owner.lastName ?? '-',
         rectanglesMarginLeft
+          + textWidth(owner.ownership ?? '-')
           + textWidth(`${owner.firstName ?? '-'} `)
           + textWidth('TITULAR / ES: '),
         yCurrent,
