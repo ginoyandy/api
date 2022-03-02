@@ -12,7 +12,8 @@
     "dev": "nodemon",
     "start": "node dist/server.js",
     "build": "tsc -p .",
-    "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main"
+    "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
