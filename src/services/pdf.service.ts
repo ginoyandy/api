@@ -292,7 +292,7 @@ export class PDF {
     pdf.text(this.order.folioNumber ? this.order.folioNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 30, yCurrent);
 
     pdf.text('TOMO: ', rectanglesMarginLeft + textWidth('MATRICULA: ') + 150, yCurrent);
-    pdf.text(this.order.volumeNumer ? this.order.volumeNumer.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 160 + textWidth('TOMO: '), yCurrent);
+    pdf.text(this.order.volumeNumber ? this.order.volumeNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 160 + textWidth('TOMO: '), yCurrent);
 
     pdf.text('AÑO: ', rectanglesMarginLeft + textWidth('MATRICULA: ') + 350, yCurrent);
     pdf.text(this.order.yearNumber ? this.order.yearNumber.toString() : '-', rectanglesMarginLeft + textWidth('MATRICULA: ') + 360 + textWidth('AÑO: '), yCurrent);

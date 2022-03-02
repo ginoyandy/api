@@ -13,7 +13,7 @@ export class Order {
     state: string;
     enrollmentNumber: number;
     folioNumber: number;
-    volumeNumer: number;
+    volumeNumber: number;
     yearNumber: number;
     observations: string;
     orderAmmount: number;
