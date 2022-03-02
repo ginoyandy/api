@@ -8,7 +8,7 @@ export class PDF {
   private pdfName: string;
 
   constructor() {
-    this.pdfName = `${new Date().toISOString().split('.')[0]}.pdf`;
+    this.pdfName = `${(process.env.ENVIROMENT === 'PRODUCTION') ? '' : 'TEST-'}${new Date().toISOString().split('.')[0]}.pdf`;
   }
 
   // Helper function

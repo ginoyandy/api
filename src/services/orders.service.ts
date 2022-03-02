@@ -34,7 +34,7 @@ export const createOrderBody = async (bytesArray: Object) => {
       });
       ordersArray.push(newOrder);
     });
-    const filname = `${new Date().toISOString().split('.')[0]}.xlsx`;
+    const filname = `${(process.env.ENVIROMENT === 'PRODUCTION') ? '' : 'TEST-'}${new Date().toISOString().split('.')[0]}.xlsx`;
 
     await sendEmail(filname, bytesArray);
     return await addOrder(ordersArray)
