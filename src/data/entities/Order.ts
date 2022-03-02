@@ -19,7 +19,7 @@ export const OrderSchema = new Schema({
   observations: String,
   orderAmmount: Number,
   informedDate: Date,
-  totalArea: Number,
+  totalArea: String,
   office: String,
   remittance: String,
   providerFactory: String,
