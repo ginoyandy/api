@@ -27,7 +27,7 @@ export const OrderValidationSchema = object({
     observations: string().required('Es necesario que hagas observaciones para continuar. '),
     orderAmmount: number().required('Debés definir un monto.'),
     informedDate: date().required('La fecha de informe es requerida. '),
-    totalArea: number().required('Es necesario que precises el área. '),
+    totalArea: string().required('Es necesario que precises el área. '),
     office: string().required('El campo oficina es requerido. '),
     remittance: string().required('Es necesario que especifiques el numero de remito. '),
     providerFactory: string().required('Es necesario que indiques el proveedor. '),
