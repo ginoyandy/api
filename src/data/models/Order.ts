@@ -50,7 +50,7 @@ export class Order {
       state: string,
       enrollmentNumber: number,
       folioNumber: number,
-      volumeNumer: number,
+      volumeNumber: number,
       yearNumber: number,
       observations: string,
       orderAmmount: number,
@@ -85,7 +85,7 @@ export class Order {
       this.state = state;
       this.enrollmentNumber = enrollmentNumber;
       this.folioNumber = folioNumber;
-      this.volumeNumer = volumeNumer;
+      this.volumeNumber = volumeNumber;
       this.yearNumber = yearNumber;
       this.observations = observations;
       this.orderAmmount = orderAmmount;
