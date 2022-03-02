@@ -7,6 +7,7 @@ import { log } from '../shared/helpers/logger';
 import { keyMap } from '../shared/order.map';
 import { PDF } from './pdf.service';
 import { sendEmail } from './email.service';
+import { excelDateToJSDate } from '../shared/helpers/excelToJs';
 
 export const createOrderBody = async (bytesArray: Object) => {
   try {
@@ -26,10 +27,8 @@ export const createOrderBody = async (bytesArray: Object) => {
       const newOrder: any = {};
       keyMap.forEach((key: string, value: string) => {
         let currentValue = order[value];
-        if (key === ('orderedDate' || 'informedDate')) {
-          currentValue = new Date(
-            order[value] * 24 * 60 * 60 * 1000 - 70 * 365 * 24 * 60 * 60 * 1000,
-          );
+        if (key === 'orderedDate') {
+          currentValue = excelDateToJSDate(order[value]);
         }
         newOrder[key] = currentValue;
       });

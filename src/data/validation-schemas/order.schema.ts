@@ -10,7 +10,7 @@ export const OrderValidationSchema = object({
       object({
         firstName: string().required('Nombre de propietario requerido. '),
         lastName: string(),
-        dni: string().required('DNI requerido. '),
+        dni: string(),
       }),
     ),
     adress: string().required('La dirección es requerida. '),
