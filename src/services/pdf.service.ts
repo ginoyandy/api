@@ -180,7 +180,7 @@ export class PDF {
       );
 
       pdf.text(
-        owner.firstName ?? '-',
+        `${owner.firstName} ` ?? '-',
         rectanglesMarginLeft
           + textWidth('TITULAR / ES: ')
           + textWidth(owner.ownership ?? '-'),
