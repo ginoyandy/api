@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "nodemon",
     "start": "node dist/server.js",
-    "build": "tsc -p .",
+    "build": "tsc",
     "deploy": "git add . && git commit -m 'Deploy commit' && git push heroku main",
     "format": "npx prettier --write ."
   },
@@ -58,6 +58,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "morgan": "^1.10.0",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "tsc": "^2.0.4"
   }
 }
