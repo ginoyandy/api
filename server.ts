@@ -23,13 +23,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
-app.use(extractToken);
-app.use('/orders', ordersRouter);
+//app.use();
+app.use('/orders',extractToken, ordersRouter);
 
 // Iniciamos el servidor express
 const startServer = async () => {
   await app.listen(process.env.PORT || 8080, () => {
-    log.info(`Server running on http://127.0.0.1:${process.env.PORT}`);
+    log.info(`Server running on port:${process.env.PORT}`);
   });
 };
 
