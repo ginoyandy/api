@@ -16,6 +16,7 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
+    "@types/pino-pretty": "^5.0.0",
     "bcrypt": "^5.0.1",
     "config": "^3.3.6",
     "cors": "^2.8.5",
@@ -58,6 +59,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
     "morgan": "^1.10.0",
+    "pino-pretty": "^9.1.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }
