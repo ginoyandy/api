@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+   hq-back:
+     image: ginomassei/hq-back:latest
+     restart: unless-stopped
+     container_name: hq-back
+     networks:
+       - network_hq
+networks:
+  network_hq:
+    name: network_hq
+    external: false
