@@ -23,8 +23,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/users', usersRouter);
-//app.use();
-app.use('/orders',extractToken, ordersRouter);
+// app.use();
+app.use('/orders', extractToken, ordersRouter);
 
 // Iniciamos el servidor express
 const startServer = async () => {
